@@ -1,0 +1,15 @@
+
+1. List all courses offered by the Engineering department.
+
+2. Find all students enrolled in a course taught by Professor Dunmire.
+
+3. Find the departments with the most number of courses offered.
+
+4. Find the average student progress (average value in progress column) for each course.
+
+5. List all courses that have more students enrolled than the average number of 
+   students enrolled per course.
+
+6. Find all faculty members who teach courses in more than one department.
+
+
