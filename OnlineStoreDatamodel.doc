@@ -1,0 +1,96 @@
+Main Entities:
+
+-Customer: Represents users of the store, storing information 
+  like name, email (unique), and potentially other details.
+-Product: Represents items for sale, including name, description, 
+  price, stock level, and other relevant attributes.
+-CustomerOrder: Represents a customer's purchase, containing 
+  the order date, customer reference, and potentially additional order information.
+-OrderItem: Links a specific customer order with the 
+purchased products and their quantities.
+
+Relationships:
+
+-A customer can place multiple orders (one-to-many).
+-An order contains multiple order items (one-to-many).
+-Each order item is associated with a specific product 
+ and a specific customer order.
+-Foreign keys enforce data integrity by ensuring 
+ references to existing records in related tables.
+
+========================================================
+========================================================
+========================================================
+create database onlineStore;
+use onlineStore;
+
+CREATE TABLE Customer (
+  customer_id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255),
+  email VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE Product (
+  product_id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255),
+  description TEXT,
+  price DECIMAL(10,2),
+  stock INT
+);
+
+CREATE TABLE CustomerOrder ( 
+  customer_order_id INT PRIMARY KEY AUTO_INCREMENT, 
+  customer_id INT,
+  order_date DATETIME,
+  INDEX customer_id_idx (customer_id),
+  FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+);
+
+CREATE TABLE OrderItem (
+  customer_order_id INT, -- Foreign key references CustomerOrder
+  product_id INT,
+  quantity INT,
+  PRIMARY KEY (customer_order_id, product_id),
+  INDEX customer_order_id_idx (customer_order_id), -- Index name adjusted
+  FOREIGN KEY (customer_order_id) REFERENCES CustomerOrder(customer_order_id),
+  FOREIGN KEY (product_id) REFERENCES Product(product_id)
+);
+
+========================================================
+========================================================
+
+INSERT INTO Customer (name, email) VALUES
+  ('John Doe', 'johndoe@example.com'),
+  ('Jane Smith', 'janesmith@example.com'),
+  ('Bob Johnson', 'bobjohnson@example.com');
+
+
+INSERT INTO Product (name, description, price, stock) VALUES
+  ('T-Shirt', 'Comfortable cotton tee', 19.99, 10),
+  ('Hoodie', 'Warm and stylish hoodie', 34.99, 5),
+  ('Mug', 'Ceramic mug with logo', 9.99, 20);
+
+INSERT INTO CustomerOrder (customer_id, order_date) VALUES
+  (1, '2024-01-23 15:44:00'), -- Replace with current timestamp
+  (2, '2024-01-21 10:30:00'),
+  (3, '2024-01-19 18:15:00');
+
+INSERT INTO OrderItem (customer_order_id, product_id, quantity) VALUES
+  (1, 1, 2),
+  (1, 3, 1),
+  (2, 2, 1),
+  (3, 1, 3),
+  (3, 2, 1);
+===================================
+
+--What customers ordered  what items?
+
+SELECT c.name AS customer_name, p.name AS product_name, oi.quantity
+FROM CustomerOrder co
+INNER JOIN Customer c ON co.customer_id = c.customer_id
+INNER JOIN OrderItem oi ON co.customer_order_id = oi.customer_order_id
+INNER JOIN Product p ON oi.product_id = p.product_id;
+
+====END========================
+
+
