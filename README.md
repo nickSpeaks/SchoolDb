@@ -23,7 +23,7 @@ Relationships:
 -Foreign keys enforce data integrity by ensuring 
  references to existing records in related tables.<br>
 
- # ==================================================
+ # =======================================
  # Trading Stock Data Model
 
  # Many-to-Many:<br> 
