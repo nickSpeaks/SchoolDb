@@ -6,9 +6,9 @@
  Main Entities:
 
 -Customer: Represents users of the store, storing information 
-  like name, email (unique), and potentially other details.
+  like name, email (unique), and potentially other details. <br>
 -Product: Represents items for sale, including name, description, 
-  price, stock level, and other relevant attributes.
+  price, stock level, and other relevant attributes.  <br>
 -CustomerOrder: Represents a customer's purchase, containing 
   the order date, customer reference, and potentially additional order information.
 -OrderItem: Links a specific customer order with the 
