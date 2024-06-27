@@ -22,3 +22,16 @@ Relationships:
  and a specific customer order.<br>
 -Foreign keys enforce data integrity by ensuring 
  references to existing records in related tables.<br>
+
+ # ==================================================
+ # Trading Stock Data Model
+
+ # Many-to-Many:<br> 
+  The Transaction table clearly shows the many-to-many  <br> 
+  relationship between traders and stocks. A single trader can have <br>
+  many transactions, and a single stock can be involved in many <br>
+  transactions with different traders. The foreign keys enforce <br>
+  this by ensuring each transaction references a valid trader and stock <br>
+
+
+ 
